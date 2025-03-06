@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+#spring:
+#  data:
+#    mongodb:
+#      # ========================================= Atlas (FOR DEPLOYMENT) ===========================================
+#      uri: mongodb+srv://mongo:P%40ssword123@cluster0.bfooric.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+#      database: shopping_platform
+      # =========================================== Docker (FOR LOCAL) ===============================================
+  #      uri: ${SPRING_DATA_MONGODB_URI}
+#  servlet:
+#    multipart:
+#      max-file-size: 256MB
+#      max-request-size: 256MB
+#      enabled: true
+
