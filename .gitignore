@@ -1,2 +1,2 @@
 *.class
-/backend/target/classes/*.class
+/backend/target/*
