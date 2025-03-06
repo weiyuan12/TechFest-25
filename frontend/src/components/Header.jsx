@@ -4,22 +4,17 @@ import Container from 'react-bootstrap/Container';
 
 export default function Header(){
     return (
-        <Navbar bg="light" expand="lg" sticky="top">
-            <Container>
-                <Navbar.Brand href="#home">
-                    <h1 class="text-3xl font-bold underline">
-                        Hello world!
-                    </h1>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#link">Link</Nav.Link>
-                </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+        <div className='bg-gray-100 flex flex-col w-full h-1/8 border-b border-gray-200'>
+            <div className='h-full items-center flex justify-between p-4'>
+                <div className='flex align-center justify-center ml-8'>
+                    <span className="text-blue-600 text-5xl font-bold">FactCheck</span>
+                </div>
+                <div>
+                <span className="text-blue-600 text-2xl font-bold mr-12">Signup</span>
+                </div>
+            </div>
+
+        </div>
     )
 }
 
