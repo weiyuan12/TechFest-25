@@ -10,9 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Handles user registration and CRUD operations for common user details, excluding buyer/seller profiles and wallet information.
- */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
