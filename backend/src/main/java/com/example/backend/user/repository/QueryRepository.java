@@ -6,5 +6,5 @@ import com.example.backend.user.model.Query;
 
 @Repository
 public interface QueryRepository extends MongoRepository<Query, String>{
-    
+
 }

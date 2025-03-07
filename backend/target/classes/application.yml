@@ -4,7 +4,8 @@ server:
 spring:
   data:
     mongodb:
-      uri: ${SPRING_DATA_MONGODB_URI} # docker-compose.yml
+#      uri: ${SPRING_DATA_MONGODB_URI} # docker-compose.yml
+      uri: mongodb://root:secret@localhost:27017/user?authSource=admin
 #  servlet:
 #    multipart:
 #      max-file-size: 256MB

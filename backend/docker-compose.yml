@@ -1,17 +1,18 @@
 services:
 
-  app:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mongodb
-    environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://root:secret@mongodb:27017/user?authSource=admin #mongodb instead of localhost
-    networks:
-      - app-network
+#  app:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - mongodb
+#    environment:
+#      - SPRING_DATA_MONGODB_URI=mongodb://root:secret@mongodb:27017/user?authSource=admin #mongodb instead of localhost
+#    networks:
+#      - app-network
+#  mongodb://root:secret@localhost:27017/user?authSource=admin
 
   mongodb:
     image: 'mongo:latest'

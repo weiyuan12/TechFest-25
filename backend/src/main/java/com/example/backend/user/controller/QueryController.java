@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequiredArgsConstructor
 @RequestMapping("/api/query")
 public class QueryController {
-    @Autowired
+//    @Autowired
     private final QueryService queryService;
 
     @PostMapping("/")
@@ -33,7 +33,7 @@ public class QueryController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
         }
     }
-    
-    
+
+
 
 }
