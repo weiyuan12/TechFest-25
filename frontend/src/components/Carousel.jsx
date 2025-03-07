@@ -63,7 +63,7 @@ export default function Carousel() {
             <img
               src={img}
               alt={`image-${index}`}
-              className="h-[48rem] w-full object-cover"
+              className="h-[52rem] w-full object-cover"
             />
           </SwiperSlide>
         ))}
