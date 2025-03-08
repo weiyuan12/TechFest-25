@@ -5,9 +5,6 @@ spring:
   data:
     mongodb:
       uri: ${SPRING_DATA_MONGODB_URI} # docker-compose.yml
-#  servlet:
-#    multipart:
-#      max-file-size: 256MB
-#      max-request-size: 256MB
-#      enabled: true
+#      uri: mongodb://root:secret@localhost:27017/user?authSource=admin # not container
+#      uri: mongodb://root:secret@mongodb:27017/user?authSource=admin # container
 

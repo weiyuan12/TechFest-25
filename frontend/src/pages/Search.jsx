@@ -81,6 +81,7 @@ export default function Search() {
     }, 1200); // Simulate network delay of 1.2 seconds
   };
 
+
   // Function to render confidence level with appropriate color
   const renderConfidence = (confidence) => {
     let color;
@@ -125,7 +126,7 @@ export default function Search() {
             </p>
           </div>
           
-          <form onSubmit={handleSearch} className="relative">
+          <form onSubmit={handleSearch2} className="relative">
             <div 
               className={`flex items-center bg-white rounded-xl border-2 ${
                 searchFocused ? 'border-blue-500 shadow-lg' : 'border-gray-200 shadow-md'
