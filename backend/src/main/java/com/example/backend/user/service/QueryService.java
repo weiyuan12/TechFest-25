@@ -12,6 +12,7 @@ import com.example.backend.user.dto.QueryResponseDTO;
 import com.example.backend.user.mapper.QueryMapper;
 import com.example.backend.user.model.Query;
 import com.example.backend.user.repository.QueryRepository;
+import com.example.backend.user.dto.ImageResponseDTO;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,21 +71,20 @@ public class QueryService {
 //        return query;
 //    }
 
-     public Query createQueryForImage2(MultipartFile image){
-         Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(ImageDTO.builder().image(image).build());
+     public Query createQueryForImage2(ImageDTO image){
+         Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(image);
          query.setMessageId(UUID.randomUUID());
          query.setCreatedAt(LocalDateTime.now());
          System.out.println(query);
-         log.info("query = {}", query);
-
-         // call llm
+         ImageResponseDTO response = pythonServiceClient.postImage(image.getFiles(), query.getMessageId().toString());
+         System.out.println(response);
 
 
          // set the values after calling llm
-//         query.setCategory(response.getCategory());
-//         query.setTruthScore(response.getTruthScore());
-//         query.setReasoning(response.getReasoning());
-//         query.setCitations(response.getCitations());
+        query.setCategory(response.getCategory());
+        query.setTruthScore(response.getTruthScore());
+        query.setReasoning(response.getReasoning());
+        query.setCitations(response.getCitations());
          queryRepository.save(query);
          return query;
      }

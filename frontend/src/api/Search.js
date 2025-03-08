@@ -1,15 +1,15 @@
 import axios from "axios"
 
-export const sendSearchRequest = async (text) => {
+export const sendSearchRequest = async (text, file) => {
     try {
         const response = await axios.post(
-            "http://localhost:8080/api/query/a", 
+            "http://localhost:8080/api/query/image", 
             {
-                "text" : text
+                "image" : file
             }, // Your request data
             {
                 headers: {
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'multipart/form-data' 
                 }
             }
         );

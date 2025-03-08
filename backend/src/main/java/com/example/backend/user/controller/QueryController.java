@@ -1,6 +1,9 @@
 package com.example.backend.user.controller;
 
 import com.example.backend.user.dto.ImageDTO;
+
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,15 +36,19 @@ public class QueryController {
         }
     }
 
-    // @PostMapping(value = "/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8"})
-    // public ResponseEntity<?> postMethodName2(@RequestParam("image") MultipartFile imageDTO) {
-    //     try {
-    //         return ResponseEntity.status(HttpStatus.CREATED).body(queryService.createQueryForImage2(imageDTO));
-    //     } catch (Exception e) {
-    //         log.error("Error creating user", e);
-    //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
-    //     }
-    // }
+    @PostMapping(value = "/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8"})
+    public ResponseEntity<?> postMethodName2(@RequestPart("image") MultipartFile image) {
+        try {
+            ImageDTO imageDTO = ImageDTO.builder()
+                .files(image)
+                .build();
+            log.info("Recieved image=  {}", imageDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(queryService.createQueryForImage2(imageDTO));
+        } catch (Exception e) {
+            log.error("Error creating user", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
+        }
+    }
 
     @GetMapping("/all")
     public ResponseEntity<?> getMethodName() {

@@ -1,6 +1,6 @@
 import uvicorn 
 from http import HTTPStatus
-from fastapi import FastAPI, UploadFile, HTTPException
+from fastapi import FastAPI, UploadFile, HTTPException, Form
 from pathlib import Path
 from typing import Any 
 from dotenv import load_dotenv
@@ -64,8 +64,8 @@ async def check_text(
 @app.post("/image/", status_code=HTTPStatus.OK)
 @app.post("/image", status_code=HTTPStatus.OK)
 async def check_image(
-    messageId: str,
-    files: UploadFile # Only accept .jpg, .jpeg, .png images
+    files: UploadFile,
+    messageId: str = Form(...)
 ):
     """
     Fact check image input
@@ -77,6 +77,7 @@ async def check_image(
         response: ResponseFormat
     """
     try:
+        messageId = str(messageId)
         image_file = files
 
         MAX_FILE_SIZE = 10 * 1024 * 1024 #10 MB in Bytes

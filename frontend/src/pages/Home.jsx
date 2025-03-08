@@ -17,6 +17,7 @@ export default function Home() {
   const [query, setQuery] = useState("");
   const [displaySignInPage, setDisplaySignInPage] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
+  const [file, setFile] = useState(null);
   const inputFile = useRef(null);
   const signIn = useCallback(() => {
     setDisplaySignInPage(true);
@@ -28,6 +29,7 @@ export default function Home() {
   const handleFileChange = (event) => {
     event.preventDefault();
     const fileUpload = event.target.files[0];
+    setFile(fileUpload)
     setImagePreview(URL.createObjectURL(fileUpload));
     console.log(fileUpload);
   };
@@ -37,11 +39,12 @@ export default function Home() {
   };
   const removeImage = () => {
     setImagePreview(null);
+    setFile(null)
   }
 
   async function handleSearch(event) {
     event.preventDefault();
-    const response = await sendSearchRequest(query);
+    const response = await sendSearchRequest(query, file);
     console.log(response);
     navigate("/search");
     

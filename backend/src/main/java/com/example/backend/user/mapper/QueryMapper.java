@@ -19,7 +19,7 @@ public interface QueryMapper {
     @Mapping(target = "query", source = "text")
     Query fromQueryDTOtoQueryForCreate(QueryDTO queryDTO);
 
-    @Mapping(target = "image", source = "image", qualifiedByName = "multipartFileToBinary")
+    @Mapping(target = "image", source = "files", qualifiedByName = "multipartFileToBinary")
     @Mapping(target = "messageId", ignore = true)
     Query fromImageQueryDTOtoQueryForCreate(ImageDTO imageDTO);
 
