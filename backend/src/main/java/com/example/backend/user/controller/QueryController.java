@@ -24,7 +24,7 @@ public class QueryController {
 //    @Autowired
     private final QueryService queryService;
 
-    @PostMapping("/")
+    @PostMapping("/a")
     public ResponseEntity<?> postMethodName(@RequestBody QueryDTO queryDTO) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(queryService.createQuery(queryDTO));

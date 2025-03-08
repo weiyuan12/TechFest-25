@@ -36,6 +36,8 @@ import java.util.Collections;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
+//    private final JwtTokenProvider jwtTokenProvider;
+//    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -55,7 +57,7 @@ public class WebSecurityConfig {
         return http
                 .securityMatcher(AntPathRequestMatcher.antMatcher("/api/**"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query/a")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/users/signup")).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -68,6 +70,24 @@ public class WebSecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
+    public AuthenticationEntryPoint accessDeniedHandler() {
+        return (request, response, ex) -> {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+
+        };
+    }
+
+    private String convertObjectToJson(Object object) throws JsonProcessingException {
+        if (object == null) {
+            return null;
+        }
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule())
+                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        return mapper.writeValueAsString(object);
     }
 
 }
