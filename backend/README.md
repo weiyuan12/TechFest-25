@@ -39,6 +39,12 @@ To build and run the containers using Docker Compose, use the following command:
 docker-compose -f ./docker-compose.yml up -d
 ```
 
+No cache
+```bash
+docker compose -f ./docker-compose.yml build --no-cache && docker compose -f ./docker-compose.yml up -d
+```
+
+
 ### 3. Verify the Application
 
 - Your Spring Boot application will be running on [http://localhost:8080](http://localhost:8080).
