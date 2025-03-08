@@ -2,7 +2,7 @@ services:
 
   app:
     build:
-      context: ./
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
@@ -28,11 +28,21 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh mongodb:27017/user --quiet
+      test: echo 'db.runCommand("ping").ok'
       interval: 200s
       timeout: 10s
       retries: 5
       start_period: 40s
+  
+  genai:
+    build:
+      context: ./genai # Path to your genai directory
+      dockerfile: Dockerfile # Dockerfile in your genai directory
+    ports:
+      - "8000:8000"
+    container_name: "genai"
+    networks:
+      - app-network
 
 networks:
   app-network:

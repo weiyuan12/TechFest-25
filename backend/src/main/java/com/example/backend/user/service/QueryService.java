@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.backend.user.client.PythonServiceClient;
 import com.example.backend.user.dto.QueryDTO;
+import com.example.backend.user.dto.QueryResponseDTO;
 import com.example.backend.user.mapper.QueryMapper;
 import com.example.backend.user.model.Query;
 import com.example.backend.user.repository.QueryRepository;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -23,21 +26,23 @@ import java.util.List;
 public class QueryService {
     private final QueryRepository queryRepository;
     private final QueryMapper queryMapper;
+    private final PythonServiceClient pythonServiceClient;
 
     public Query createQueryForText(QueryDTO queryDTO){
+        queryDTO.setMessageId(UUID.randomUUID());
         Query query = queryMapper.fromQueryDTOtoQueryForCreate(queryDTO);
         query.setCreatedAt(LocalDateTime.now());
+        query.setMessageId(queryDTO.getMessageId());
 
         log.info("userQuery: {}", query);
         // call llm
-
+        QueryResponseDTO response = pythonServiceClient.postText(queryDTO);
 
         // set the values after calling llm
-        query.setCategory("CATEGORY");
-        query.setTruthScore(1);
-        query.setReasoning("REASONING");
-        String[] citations = {"lousy", "fake media outlet"};
-        query.setCitations(citations);
+        query.setCategory(response.getCategory());
+        query.setTruthScore(response.getTruthScore());
+        query.setReasoning(response.getReasoning());
+        query.setCitations(response.getCitations());
         queryRepository.save(query);
         return query;
     }
@@ -65,23 +70,22 @@ public class QueryService {
 //        return query;
 //    }
 
-    public Query createQueryForImage2(MultipartFile image){
-        Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(ImageDTO.builder().image(image).build());
-        query.setCreatedAt(LocalDateTime.now());
-        System.out.println(query);
-        log.info("query = {}", query);
+    // public Query createQueryForImage2(MultipartFile image){
+    //     Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(ImageDTO.builder().image(image).build());
+    //     query.setCreatedAt(LocalDateTime.now());
+    //     System.out.println(query);
+    //     log.info("query = {}", query);
 
-        // call llm
+    //     // call llm
 
 
-        // set the values after calling llm
-        query.setCategory("CATEGORY");
-        query.setTruthScore(1);
-        query.setReasoning("REASONING");
-        String[] citations = {"lousy", "fake media outlet"};
-        query.setCitations(citations);
-        queryRepository.save(query);
-        return query;
-    }
+    //     // set the values after calling llm
+    //     query.setCategory(response.getCategory());
+    //     query.setTruthScore(response.getTruthScore());
+    //     query.setReasoning(response.getReasoning());
+    //     query.setCitations(response.getCitations());
+    //     queryRepository.save(query);
+    //     return query;
+    // }
 
 }

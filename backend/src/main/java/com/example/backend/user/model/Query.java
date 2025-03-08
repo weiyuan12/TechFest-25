@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -17,7 +18,7 @@ import java.time.LocalDateTime;
 @Document(collection = "queries")
 public class Query {
     @Id
-    private String id;
+    private UUID messageId;
     private String query;
     private String category;
     private Integer truthScore;

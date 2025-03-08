@@ -15,7 +15,7 @@ import java.util.Base64;
 
 @Mapper(componentModel = "spring")
 public interface QueryMapper {
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "messageId", ignore = true)
     @Mapping(target = "query", source = "text")
     Query fromQueryDTOtoQueryForCreate(QueryDTO queryDTO);
 
