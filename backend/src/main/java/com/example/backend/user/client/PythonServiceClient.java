@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.example.backend.user.dto.QueryDTO;
 import com.example.backend.user.dto.QueryResponseDTO;
 
-@FeignClient(name="PythonService", url = "http://localhost:8000")
+@FeignClient(name="PythonService", url = "http://genai:8000")
 public interface PythonServiceClient {
     @PostMapping("/text")
     QueryResponseDTO postText(@RequestBody QueryDTO queryDTO);
