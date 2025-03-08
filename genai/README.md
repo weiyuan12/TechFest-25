@@ -34,6 +34,19 @@ Hence, by providing it with real-time Search API that can allow agents to receiv
 
 This shows that Agentic framework with relevant Web search tools will reduce hallucinations from LLM and return up-to-date information to users. 
 
+## Tracing and Tracking of Messages 
+Lastly, to constantly evaluate the performance of our Large Language Model, Langfuse is integrated into our application. 
+
+Langfuse is an open-source LLM engineering platform that helps teams collaboratively debug, analyse, and iterate through the LLM application. As responses from LLMs might be non-deterministic, debugging of the application are usually complicated, making it difficult to pinpoint the root cause of the issue. 
+
+Hence, with Langfuse, it allows us to capture the full context of an LLM application as well as breaking down the different agentic steps into a single step to allow for greater control during debugging. Hence, by integrating with Langfuse, it allows for greater control and allowing us to further evaluate our Agentic framework. 
+
+Sample Langfuse Trace:
+<p align="center">
+  <img align="center" alt="Mockup" title="Mockup" src="assets/sample_langfuse.png"></img>
+</a>
+</p>
+
 ## Setup and Installation 
 1. Clone the repository
 ```
