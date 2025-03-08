@@ -36,6 +36,7 @@ async def check_text(
         config: dict[str, Any] = {"configurable": {"thread_id": text_input.messageId}}
 
         result = agent_graph.invoke({"messages": [user_input]}, config)
+        print(result)
 
         structured_response = result.get('structured_response')
 
@@ -91,6 +92,7 @@ async def check_image(
 
         # Invoke Agentic graph
         result = agent_graph.invoke({"messages": [text_content]}, config)
+        print(result)
 
         # Return as structured response
         structured_response = result.get('structured_response')
