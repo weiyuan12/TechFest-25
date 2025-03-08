@@ -20,7 +20,7 @@ function CustomNavigation() {
         onClick={() => swiper.slidePrev()}
         className="dark !absolute left-2 top-1/2 z-10 -translate-y-1/2"
       >
-        <FaChevronLeft className="h-7 w-7 -translate-x-0.5 stroke-2 text-sky-50" />
+        <FaChevronLeft className="h-7 w-7 -translate-x-0.5 stroke-2 text-sky-200" />
       </IconButton>
       <IconButton
         isCircular
@@ -29,7 +29,7 @@ function CustomNavigation() {
         onClick={() => swiper.slideNext()}
         className="dark !absolute right-2 top-1/2 z-10 -translate-y-1/2"
       >
-        <FaChevronRight className="h-7 w-7 translate-x-px stroke-2 text-sky-50" />
+        <FaChevronRight className="h-7 w-7 translate-x-px stroke-2 text-sky-200" />
       </IconButton>
     </>
   );
@@ -53,7 +53,7 @@ export default function Carousel() {
         className="relative rounded-lg [&_div.swiper-button-next]:text-background [&_div.swiper-button-prev]:text-background"
       >
         {[
-          "https://images.unsplash.com/photo-1470813740244-df37b8c1edcb?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D",
+          "/image.png",
           "https://plus.unsplash.com/premium_photo-1673603988651-99f79e4ae7d3?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D",
           "https://images.unsplash.com/photo-1465189684280-6a8fa9b19a7a?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5hdHVyZXxlbnwwfDB8MHx8fDA%3D",
           "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D",
