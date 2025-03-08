@@ -1,5 +1,10 @@
+from http import HTTPStatus
 from textwrap import dedent 
+from dotenv import load_dotenv
 
+from fastapi import HTTPException
+
+from langchain_core.tools import Tool
 from langgraph.graph.graph import CompiledGraph
 from langgraph.checkpoint.memory import MemorySaver
 from langchain_community.tools.wikipedia.tool import WikipediaQueryRun, WikipediaAPIWrapper
@@ -7,6 +12,7 @@ from langchain_community.tools.wikidata.tool import WikidataQueryRun, WikidataAP
 from langchain_community.tools.arxiv.tool import ArxivQueryRun, ArxivAPIWrapper
 from langchain_community.tools.pubmed.tool import PubmedQueryRun, PubMedAPIWrapper
 from langchain_community.tools.ddg_search.tool import DuckDuckGoSearchRun, DuckDuckGoSearchAPIWrapper
+from langchain_google_community import GoogleSearchAPIWrapper, GoogleSearchRun
 from langgraph.prebuilt import create_react_agent
 
 from pydantic import BaseModel, Field
@@ -14,17 +20,19 @@ from typing import Literal, Optional, List
 
 from llm_setup import LLMSetup
 
+load_dotenv(override=True)
+
 __all__ = ("create_agent_graph")
 
-#TODO: Set up GoogleSearch Tool
 
 prompt: str = dedent(
     """
     You are a specialised fact checking agent designed to assist users 
     in identifying misinformation. 
 
-    Agents are granted access to web search tools such as Wikipedia,
-    Wikidata, Arxiv, Pubmed DuckDuckGoSearch, and GoogleSearch. You are
+    Agents are granted access to web search tools such as GoogleSearch, Wikipedia,
+    Wikidata, Arxiv, Pubmed and DuckDuckGoSearch. If possible, you are to first
+    try it out with GoogleSearch, to look for the relevant information. You are
     provided with the ability to search through these tools to check the 
     information user provided. You should also cite references to the websites
     if you have referred to these websites as knowledge bases. You should
@@ -41,7 +49,8 @@ prompt: str = dedent(
     - irrlevant: Trivial/banal messages with nothing to assess
     - unsure: Unsure of what is the message about
 
-    2. After which, 
+    2. Based on the categories of the message, you are to provide some reasoning behind the category and the truth score.
+    3. List down the website citations you referred to which aids in making the decision. 
     """
 )
 
@@ -61,25 +70,39 @@ def create_agent_graph() -> CompiledGraph:
     Create the Factchecker Agent Graph
 
     Args:
+        None
 
-    Returns:
+    Returns: 
+        graph: CompiledGraph
     """
     llm = LLMSetup().get_model()
 
-    # Instantiate tools
-    wikipedia: WikipediaQueryRun = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
-    wikidata: WikidataQueryRun = WikidataQueryRun(api_wrapper=WikidataAPIWrapper())
-    duck_duck_go: DuckDuckGoSearchRun = DuckDuckGoSearchRun(api_wrapper=DuckDuckGoSearchAPIWrapper())
-    arxiv: ArxivQueryRun = ArxivQueryRun(api_wrapper=ArxivAPIWrapper())
-    pubmed: PubmedQueryRun = PubmedQueryRun(api_wrapper=PubMedAPIWrapper())
+    try:
+        # Instantiate tools
+        wikipedia: WikipediaQueryRun = WikipediaQueryRun(api_wrapper=WikipediaAPIWrapper())
+        wikidata: WikidataQueryRun = WikidataQueryRun(api_wrapper=WikidataAPIWrapper())
+        duck_duck_go: DuckDuckGoSearchRun = DuckDuckGoSearchRun(api_wrapper=DuckDuckGoSearchAPIWrapper())
+        arxiv: ArxivQueryRun = ArxivQueryRun(api_wrapper=ArxivAPIWrapper())
+        pubmed: PubmedQueryRun = PubmedQueryRun(api_wrapper=PubMedAPIWrapper())
+        search = GoogleSearchAPIWrapper()
+        googleSearchTool = Tool(
+            name="google_search",
+            description="Search Google for recent results.",
+            func=search.run,
+        )
 
-    return create_react_agent(
-        model=llm,
-        tools=[wikipedia, wikidata, duck_duck_go, arxiv, pubmed],
-        checkpointer=MemorySaver(),
-        prompt=prompt,
-        response_format=ResponseFormat
-    )
+        return create_react_agent(
+            model=llm,
+            tools=[googleSearchTool, wikipedia, wikidata, duck_duck_go, arxiv, pubmed],
+            checkpointer=MemorySaver(),
+            prompt=prompt,
+            response_format=ResponseFormat
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=int(HTTPStatus.UNPROCESSABLE_ENTITY),
+            detail="Error when running factchecking agent"
+        )
 
 if __name__ == "__main__":
     from uuid import uuid4
