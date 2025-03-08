@@ -9,6 +9,7 @@ from models import FactCheckingTextInput
 from visual_analysis import visual_analysis, ImageOutput
 from graph import create_agent_graph
 from langfuse.callback import CallbackHandler
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv(override=True)
 
@@ -16,6 +17,13 @@ load_dotenv(override=True)
 langfuse_handler = CallbackHandler()
 
 app: FastAPI = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 @app.get("/", status_code=HTTPStatus.OK)
 def read_root():
@@ -113,4 +121,4 @@ async def check_image(
 
 
 if __name__ == "__main__":
-    uvicorn.run('server:app', reload=True)
+    uvicorn.run('server:app',  host="0.0.0.0", reload=True)
