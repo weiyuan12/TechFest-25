@@ -46,7 +46,7 @@ function CustomNavigation() {
         size="lg"
         variant="ghost"
         onClick={() => swiper.slidePrev()}
-        className="dark !absolute left-2 top-1/2 z-10 -translate-y-1/2 border-0 focus:outline-none"
+        className="dark !absolute left-2 top-1/2 z-10 -translate-y-1/2 border-0 focus:outline-none cursor-pointer"
       >
         <FaChevronLeft className="h-7 w-7 -translate-x-0.5 stroke-2 text-sky-50" />
       </IconButton>
@@ -55,7 +55,7 @@ function CustomNavigation() {
         size="lg"
         variant="ghost"
         onClick={() => swiper.slideNext()}
-        className="dark !absolute right-2 top-1/2 z-10 -translate-y-1/2 border-0 focus:outline-none"
+        className="dark !absolute right-2 top-1/2 z-10 -translate-y-1/2 border-0 focus:outline-none cursor-pointer"
       >
         <FaChevronRight className="h-7 w-7 translate-x-px stroke-2 text-sky-50" />
       </IconButton>
