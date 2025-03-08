@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Search, ExternalLink } from 'lucide-react';
 import { useEffect } from "react";
+import Header from "../components/Header";
 
 export default function SearchResults() {
 
@@ -48,6 +49,7 @@ export default function SearchResults() {
 
   const handleExampleClick = (query) => {
     setSearchQuery(query);
+    handleSearch(query);
   };
 
   const handleSearch = async (event) => {
@@ -105,8 +107,10 @@ export default function SearchResults() {
   };
 
   return (
-    <div className="flex flex-col w-full h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="flex flex-col w-full h-screen from-blue-50 to-indigo-100">
+
       {/* Header */}
+      {/*
       <header className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -125,10 +129,14 @@ export default function SearchResults() {
           </div>
         </div>
       </header>
+      */}
+
+      <Header />
       
       {/* Main content */}
       <main className="flex-grow flex flex-col items-center px-4 sm:px-6 lg:px-8 py-8">
         <div className="w-full max-w-3xl">
+          {/*
           <div className="text-center mb-8">
             <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
               Find factual information you can trust
@@ -137,6 +145,7 @@ export default function SearchResults() {
               Search for claims, news stories, or topics to get fact-checked information from reliable sources.
             </p>
           </div>
+          */}
           
           <form onSubmit={handleSearch} className="relative">
             <div 
@@ -168,6 +177,7 @@ export default function SearchResults() {
             </div>
           </form>
           
+          {/*
           {!searchResults && !isLoading && !error && (
             <div className="mt-6">
               <p className="text-gray-600 text-sm mb-3 font-medium">Popular searches:</p>
@@ -175,7 +185,7 @@ export default function SearchResults() {
                 {exampleQueries.map((query, index) => (
                   <button
                     key={index}
-                    className="bg-white hover:bg-gray-50 text-gray-700 text-sm py-2 px-4 rounded-full border border-gray-200 shadow-sm transition-colors duration-200"
+                    className="bg-white hover:bg-gray-50 text-gray-700 text-sm py-2 px-4 rounded-full border border-gray-200 shadow-sm transition-colors duration-200 cursor-pointer"
                     onClick={() => handleExampleClick(query)}
                   >
                     {query}
@@ -184,7 +194,8 @@ export default function SearchResults() {
               </div>
             </div>
           )}
-          
+          */}
+
           {/* Error message */}
           {error && (
             <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
