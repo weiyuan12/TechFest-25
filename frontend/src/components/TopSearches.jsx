@@ -55,7 +55,7 @@ const TopSearches = () => {
         </div>
 
         <div className={`text-center mt-8 transition-all duration-700 delay-700`}>
-          <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition-colors duration-200">
+          <button className="px-6 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-50 transition-colors duration-200 cursor-pointer">
             View All Top Searches
           </button>
         </div>
