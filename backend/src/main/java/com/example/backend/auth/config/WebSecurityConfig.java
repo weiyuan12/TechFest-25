@@ -58,6 +58,7 @@ public class WebSecurityConfig {
                 .securityMatcher(AntPathRequestMatcher.antMatcher("/api/**"))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query/a")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query/all")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/users/signup")).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -66,28 +67,4 @@ public class WebSecurityConfig {
 //                .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .build();
     }
-
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public AuthenticationEntryPoint accessDeniedHandler() {
-        return (request, response, ex) -> {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-
-        };
-    }
-
-    private String convertObjectToJson(Object object) throws JsonProcessingException {
-        if (object == null) {
-            return null;
-        }
-        ObjectMapper mapper = new ObjectMapper().registerModule(new JavaTimeModule())
-                .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        return mapper.writeValueAsString(object);
-    }
-
 }

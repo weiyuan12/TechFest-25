@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,4 +17,10 @@ public class Query {
     @Id
     private String id;
     private String query;
+    private String category;
+    private Integer truthScore;
+    private String reasoning;
+    private String[] citations;
+    private LocalDateTime createdAt;
+
 }

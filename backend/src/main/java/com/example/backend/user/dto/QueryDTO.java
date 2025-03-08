@@ -12,5 +12,4 @@ public class QueryDTO {
     private String id;
     @NotBlank(message = "Username is required")
     private String text;
-
 }
