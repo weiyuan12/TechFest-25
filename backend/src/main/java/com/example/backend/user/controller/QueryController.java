@@ -24,8 +24,18 @@ public class QueryController {
 //    @Autowired
     private final QueryService queryService;
 
-    @PostMapping("/a")
-    public ResponseEntity<?> postMethodName(@RequestBody QueryDTO queryDTO) {
+    @PostMapping("/queryImage")
+    public ResponseEntity<?> postImage(@RequestBody QueryDTO queryDTO) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(queryService.createQuery(queryDTO));
+        } catch (Exception e) {
+            log.error("Error creating user", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");
+        }
+    }
+    
+    @PostMapping("/queryText")
+    public ResponseEntity<?> postText(@RequestBody QueryDTO queryDTO) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(queryService.createQuery(queryDTO));
         } catch (Exception e) {
