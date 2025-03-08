@@ -82,7 +82,7 @@ export default function Carousel() {
         className="relative rounded-lg [&_div.swiper-button-next]:text-background [&_div.swiper-button-prev]:text-background"
       >
         {[
-          "/image.png",
+          "https://www.google.com/imgres?q=how%20to%20identify%20deepfakes&imgurl=https%3A%2F%2Fwww.techtarget.com%2Frms%2Fonlineimages%2Fhow_to_spot_a_deep_fake-f_mobile.png&imgrefurl=https%3A%2F%2Fwww.techtarget.com%2Fsearchsecurity%2Ftip%2FHow-to-detect-deepfakes-manually-and-using-AI&docid=drll3AwGaSF3QM&tbnid=3U4RGKCE_D6R7M&vet=12ahUKEwiZyeihmfqLAxVbwzgGHeJsOOcQM3oECBcQAA..i&w=560&h=437&hcb=2&ved=2ahUKEwiZyeihmfqLAxVbwzgGHeJsOOcQM3oECBcQAA",
           "https://plus.unsplash.com/premium_photo-1673603988651-99f79e4ae7d3?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D",
           "https://images.unsplash.com/photo-1465189684280-6a8fa9b19a7a?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG5hdHVyZXxlbnwwfDB8MHx8fDA%3D",
           "https://images.unsplash.com/photo-1458668383970-8ddd3927deed?w=1600&auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bmF0dXJlfGVufDB8MHwwfHx8MA%3D%3D",

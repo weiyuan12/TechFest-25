@@ -3,7 +3,7 @@ export default function Header({user , signIn}){
         <div className='bg-gray-100 flex flex-col w-full h-1/8 border-b border-gray-200'>
             <div className='h-full items-center flex justify-between p-8'>
                 <div className='flex align-center justify-center ml-8'>
-                    <span className="text-blue-600 text-5xl font-bold">FactCheck</span>
+                    <span className="text-blue-600 text-5xl font-bold">FactFinder</span>
                 </div>
                 <div>
                     <button onClick ={signIn} className="cursor-pointer">
