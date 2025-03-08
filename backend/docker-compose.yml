@@ -1,21 +1,24 @@
 services:
 
-#  app:
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile
-#    ports:
-#      - "8080:8080"
-#    depends_on:
-#      - mongodb
-#    environment:
-#      - SPRING_DATA_MONGODB_URI=mongodb://root:secret@mongodb:27017/user?authSource=admin #mongodb instead of localhost
-#    networks:
-#      - app-network
-#  mongodb://root:secret@localhost:27017/user?authSource=admin
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    # The depends_on directive only guarantees the container starts first, not that the service inside is ready.
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    container_name: "backend"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://root:secret@mongodb:27017/user?authSource=admin # @mongodb instead of localhost
+    networks:
+      - app-network
 
   mongodb:
     image: 'mongo:latest'
+    container_name: "mongodb"
     environment:
       - MONGO_INITDB_DATABASE=user
       - MONGO_INITDB_ROOT_PASSWORD=secret
@@ -24,6 +27,12 @@ services:
       - '27017:27017'
     networks:
       - app-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh mongodb:27017/user --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
 
 networks:
   app-network:
