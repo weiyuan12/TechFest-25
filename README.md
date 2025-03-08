@@ -30,16 +30,16 @@ Leveraging on the latest AI technologies to analyse uploaded images or text desc
 [TODO: Add in the features of the web application and interface]
 
 ## 📌 Technical Stack
-<h2> 🤖 FrontEnd </h2>
+### 🤖 FrontEnd
 <img alt = "Javascript" src = "https://img.shields.io/badge/Javascript-F7DF1E?logo=javascript&logoColor=black&style=flat"/> <img alt = "React" src = "https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black&style=flat"/>
 
-<h2>🤖 BackEnd GenAI</h2>
-<img alt = "Python" src = "https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=black&style=flat"/> <img alt = "FastAPI" src = "https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi"/> <img alt = "OpenAI" src = "https://img.shields.io/badge/chatGPT-74aa9c?logo=openai&logoColor=white"/> <img alt = "LangChain" src = "https://img.shields.io/github/v/release/hwchase17/langchain.svg"/>
+### 🤖 BackEnd GenAI
+<img alt = "Python" src = "https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=black&style=flat"/> <img alt = "OpenAI" src = "https://img.shields.io/badge/chatGPT-74aa9c?logo=openai&logoColor=white"/> <img alt = "LangChain" src = "https://img.shields.io/badge/LangChain-ffffff?logo=langchain&logoColor=green"/> <img alt = "LangGraph" src = "https://img.shields.io/badge/-LangGraph-lightblue?logo=langgraph&logoColor=black"/> <img alt = "FastAPI" src = "https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi"/>
 
-<h2>🤖 BackEnd</h2>
+### 🤖 BackEnd
 <img alt = "SpringBoot" src = "https://img.shields.io/badge/SpringBoot-6DB33F?style=flat-square&logo=Spring&logoColor=white"/>
 
-<h2>🤖 Database </h2>
+### 🤖 Database
 <img alt = "MongoDB" src = "https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=black"/>
 
 <hr>
