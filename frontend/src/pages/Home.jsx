@@ -4,25 +4,41 @@ import Carousel from "../components/Carousel";
 import TopSearches from "../components/TopSearches";
 import FadeOnScroll from "../components/FadeOnScroll";
 import { sendSearchRequest } from "../api/Search";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../context/UserContext.jsx";
+import SignInModal from "../components/SignInModal.jsx";
 
 export default function Home() {
-  const {user, setUser} = useContext(UserContext)
-  const [query, setQuery] = useState("")
-  async function handleSearch (){
-    event.preventDefault()
+  const { user, setUser } = useContext(UserContext);
+  const [query, setQuery] = useState("");
+  const [displaySignInPage, setDisplaySignInPage] = useState(false);
+  const signIn = useCallback(() => {
+    setDisplaySignInPage(true);
+    console.log("Sign in");
+  }, [displaySignInPage]);
+
+  const handleCallback = (username) => {
+    setUser(username);
+    setDisplaySignInPage(false);
+  }
+
+  async function handleSearch() {
+    event.preventDefault();
     try {
       const response = await sendSearchRequest(query); // Declare response with const
       console.log(response.data);
     } catch (error) {
-        console.error("Error fetching search results:", error);
+      console.error("Error fetching search results:", error);
     }
-  } 
+  }
   return (
     <div className="flex flex-col w-full min-h-screen bg-gray-50">
-      <Header/>
+      <Header user={user} signIn={signIn} />
       <main className="flex flex-col w-full mt-18">
+        <SignInModal isOpen={displaySignInPage} 
+        onClose={() => setDisplaySignInPage(false)}
+        callbackUserName = {handleCallback}
+        />
         <FadeOnScroll>
           <section className="flex flex-col md:flex-row w-full p-4">
             <div className="w-full md:w-1/2  flex justify-center items-center p-4 md:p-8">
@@ -47,7 +63,7 @@ export default function Home() {
                       placeholder="Search for a claim, news story, or topic..."
                       className="w-full px-5 py-4 text-lg rounded-l-lg text-black focus:outline-none"
                       value={query}
-                      onChange={(e)=> setQuery(e.target.value)}
+                      onChange={(e) => setQuery(e.target.value)}
                     />
                     <button
                       type="submit"
