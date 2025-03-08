@@ -8,3 +8,8 @@ spring:
 #      uri: mongodb://root:secret@localhost:27017/user?authSource=admin # not container
 #      uri: mongodb://root:secret@mongodb:27017/user?authSource=admin # container
 
+  servlet:
+    multipart:
+      max-file-size: 256MB
+      max-request-size: 256MB
+      enabled: true

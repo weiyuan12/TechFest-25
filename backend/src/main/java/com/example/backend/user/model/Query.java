@@ -1,11 +1,13 @@
 package com.example.backend.user.model;
 
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -22,5 +24,7 @@ public class Query {
     private String reasoning;
     private String[] citations;
     private LocalDateTime createdAt;
+//    private MultipartFile image;
+    private Binary image;
 
 }
