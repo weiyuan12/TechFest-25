@@ -4,8 +4,11 @@ import Carousel from "../components/Carousel";
 import TopSearches from "../components/TopSearches";
 import FadeOnScroll from "../components/FadeOnScroll";
 import { sendSearchRequest } from "../api/Search";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext.jsx";
+
 export default function Home() {
+  const {user, setUser} = useContext(UserContext)
   const [query, setQuery] = useState("")
   async function handleSearch (){
     event.preventDefault()
@@ -18,7 +21,7 @@ export default function Home() {
   } 
   return (
     <div className="flex flex-col w-full min-h-screen bg-gray-50">
-      <Header />
+      <Header/>
       <main className="flex flex-col w-full mt-18">
         <FadeOnScroll>
           <section className="flex flex-col md:flex-row w-full p-4">
