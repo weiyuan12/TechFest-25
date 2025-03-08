@@ -104,7 +104,7 @@ export default function Home() {
                       </div>
                     )}
                 <form className="w-full" onSubmit={handleSearch}>
-                  <div className="flex items-center bg-white rounded-full border-2 border-blue-600 shadow-lg">
+                  <div className="flex items-center bg-white rounded-lg border-2 border-blue-600 shadow-lg">
                     <input
                       type="text"
                       placeholder="Search for a claim, news story, or topic..."
@@ -138,7 +138,7 @@ export default function Home() {
                     {/* Search Button */}
                     <button
                       type="submit"
-                      className="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-full transition-transform duration-200 transform hover:scale-105 mr-2 flex items-center justify-center cursor-pointer"
+                      className="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-lg transition-transform duration-200 transform hover:scale-105 mr-2 flex items-center justify-center cursor-pointer"
                     >
                       {/* <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search">
                         <circle cx="11" cy="11" r="8"></circle>
