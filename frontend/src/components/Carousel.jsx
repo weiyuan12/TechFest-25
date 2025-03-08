@@ -8,6 +8,7 @@ import { IconButton } from "@material-tailwind/react";
 import { FaChevronLeft, FaChevronRight  } from "react-icons/fa6"
 import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 
+/*
 function CustomNavigation() {
   const swiper = useSwiper();
 
@@ -33,7 +34,35 @@ function CustomNavigation() {
       </IconButton>
     </>
   );
+}*/
+
+function CustomNavigation() {
+  const swiper = useSwiper();
+
+  return (
+    <>
+      <IconButton
+        isCircular
+        size="lg"
+        variant="ghost"
+        onClick={() => swiper.slidePrev()}
+        className="dark !absolute left-2 top-1/2 z-10 -translate-y-1/2 border-0 focus:outline-none"
+      >
+        <FaChevronLeft className="h-7 w-7 -translate-x-0.5 stroke-2 text-sky-50" />
+      </IconButton>
+      <IconButton
+        isCircular
+        size="lg"
+        variant="ghost"
+        onClick={() => swiper.slideNext()}
+        className="dark !absolute right-2 top-1/2 z-10 -translate-y-1/2 border-0 focus:outline-none"
+      >
+        <FaChevronRight className="h-7 w-7 translate-x-px stroke-2 text-sky-50" />
+      </IconButton>
+    </>
+  );
 }
+
 
 function customPagination(_, className) {
   return `<span class="${className} w-4 h-4 [&.swiper-pagination-bullet-active]:!opacity-100 [&.swiper-pagination-bullet-active]:[background:rgb(var(--color-background))] !opacity-50 ![background:rgb(var(--color-background))]"></span>`;

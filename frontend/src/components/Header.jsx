@@ -7,7 +7,7 @@ export default function Header({user , signIn}){
                 </div>
                 <div>
                     <button onClick ={signIn}>
-                        <span className="text-blue-600 text-2xl font-bold mr-12">{user ? user : "Signup"}</span>
+                        <span className="text-blue-600 text-2xl font-bold mr-12">{user ? user : "Sign Up"}</span>
                     </button>
                     
                 </div>
