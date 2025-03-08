@@ -1,7 +1,7 @@
 # Build stage
 FROM maven:3.9-eclipse-temurin-21 as build
 # Sets the working directory inside the container to /app
-WORKDIR /app
+WORKDIR /backend
 COPY pom.xml .
 # Copies your source code directory into the container
 COPY src ./src
@@ -19,6 +19,6 @@ RUN apt-get update && apt-get install -y mongodb-database-tools
 VOLUME /tmp
 
 # Copies the JAR file created in the build stage into the runtime container
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /backend/target/*.jar app.jar
 
 ENTRYPOINT ["java","-Xmx2g","-Xms2g","-jar","/app.jar"]
