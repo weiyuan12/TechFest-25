@@ -3,8 +3,19 @@ import Header from "../components/Header";
 import Carousel from "../components/Carousel";
 import TopSearches from "../components/TopSearches";
 import FadeOnScroll from "../components/FadeOnScroll";
-
+import { sendSearchRequest } from "../api/Search";
+import { useState } from "react";
 export default function Home() {
+  const [query, setQuery] = useState("")
+  async function handleSearch (){
+    event.preventDefault()
+    try {
+      const response = await sendSearchRequest(query); // Declare response with const
+      console.log(response.data);
+    } catch (error) {
+        console.error("Error fetching search results:", error);
+    }
+  } 
   return (
     <div className="flex flex-col w-full min-h-screen bg-gray-50">
       <Header />
@@ -26,12 +37,14 @@ export default function Home() {
                   </p>
                 </div>
 
-                <form className="w-full">
+                <form className="w-full" onSubmit={handleSearch}>
                   <div className="flex items-center bg-white rounded-lg border-2 border-blue-500 shadow-lg hover:shadow-xl transition-shadow duration-200">
                     <input
                       type="text"
                       placeholder="Search for a claim, news story, or topic..."
                       className="w-full px-5 py-4 text-lg rounded-l-lg text-black focus:outline-none"
+                      value={query}
+                      onChange={(e)=> setQuery(e.target.value)}
                     />
                     <button
                       type="submit"
