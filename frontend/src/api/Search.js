@@ -13,6 +13,7 @@ export const sendSearchRequest = async (text) => {
                 }
             }
         );
+        return response
         // ... handle response
     } catch (error) {
         // ... handle error

@@ -8,12 +8,11 @@ import { useCallback, useContext, useState, useRef } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 import SignInModal from "../components/SignInModal.jsx";
 import { IconButton } from "@material-tailwind/react";
+import { useNavigate } from "react-router";
 
-import { useNavigate } from "react-router-dom";  // ✅ Import useNavigate
 
 export default function Home() {
-  const navigate = useNavigate();
-
+  const navigate  = useNavigate();
   const { user, setUser } = useContext(UserContext);
   const [query, setQuery] = useState("");
   const [displaySignInPage, setDisplaySignInPage] = useState(false);
@@ -42,22 +41,11 @@ export default function Home() {
 
   async function handleSearch(event) {
     event.preventDefault();
-
-    try {
-      //const response = await sendSearchRequest(query); // Declare response with const
-      //console.log(response.data);
-
-      // Redirect to search results page
-      // navigate(`/search?q=${encodeURIComponent(query)}`);
-
-      const searchUrl = `/search?q=${encodeURIComponent(query)}`;
+    const response = await sendSearchRequest(query);
+    console.log(response);
+    navigate("/search");
     
-      // Open the search results in a new tab
-      window.open(searchUrl, "_blank");
-
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
+    
   }
 
   return (
