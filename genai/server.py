@@ -3,11 +3,17 @@ from http import HTTPStatus
 from fastapi import FastAPI, UploadFile, HTTPException
 from pathlib import Path
 from typing import Any 
+from dotenv import load_dotenv
 
 from models import FactCheckingTextInput
 from visual_analysis import visual_analysis, ImageOutput
 from graph import create_agent_graph
+from langfuse.callback import CallbackHandler
 
+load_dotenv(override=True)
+
+# Initialize Langfuse CallbackHandler for Langchain (tracing)
+langfuse_handler = CallbackHandler()
 
 app: FastAPI = FastAPI()
 
@@ -33,7 +39,8 @@ async def check_text(
         user_input = text_input.text
         agent_graph = create_agent_graph()
         
-        config: dict[str, Any] = {"configurable": {"thread_id": text_input.messageId}}
+        config: dict[str, Any] = {"configurable": {"thread_id": text_input.messageId},
+                                  "callbacks": [langfuse_handler]}
 
         result = agent_graph.invoke({"messages": [user_input]}, config)
         print(result)
@@ -88,7 +95,8 @@ async def check_image(
         agent_graph = create_agent_graph()
         
         # LangGraph Config 
-        config: dict[str, Any] = {"configurable": {"thread_id": messageId}}
+        config: dict[str, Any] = {"configurable": {"thread_id": messageId},
+                                  "callbacks": [langfuse_handler]}
 
         # Invoke Agentic graph
         result = agent_graph.invoke({"messages": [text_content]}, config)
