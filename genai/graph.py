@@ -42,6 +42,9 @@ prompt: str = dedent(
     - scam: Intended to obtain money/personal information via deception
     - illicit: Other potential illicit activity that are not scams, e.g. moneylending, or prostitutions
     - info: Messages intended to inform/convince/mislead a broad base of people
+        - You will be required to provide a truthscore for messages categorised as info. 
+        - If messages is entirely false, provide a score of 0,
+        - If message is entirely true, provide a score of 5
     - satire: Similar to info, but clearly satirical in nature
     - spam: Unsolicited spam, such as marketing messages
     - legitimate: Legitimate source, typically meant for the individual as opposed to a broad base, 
@@ -59,7 +62,7 @@ class ResponseFormat(BaseModel):
     Respond to the user in the folllowing format
     """
     category: Literal["scam", "illicit", "info", "satire", "spam", "legitimate", "irrelevant", "unsure"] = Field(description="Assigned category of the message")
-    truthscore: Optional[int | None] = Field(description="truthscore assigned: (1 to 5) if is categorised as info, 1 entirely false, 5 entirely true, otherwise set to None", default=None)
+    truthscore: Optional[int | None] = Field(description="truthscore assigned: (0 to 5) if is categorised as info, 0 entirely false, 5 entirely true, otherwise set to None", default=None)
     reasoning: str = Field(description="The reasoning behind the category and the truth score.")
     citations: List[str] = Field(description="List of website citations referred to aid in making the decision")
 
