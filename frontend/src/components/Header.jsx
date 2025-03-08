@@ -6,7 +6,7 @@ export default function Header({user , signIn}){
                     <span className="text-blue-600 text-5xl font-bold">FactCheck</span>
                 </div>
                 <div>
-                    <button onClick ={signIn}>
+                    <button onClick ={signIn} className="cursor-pointer">
                         <span className="text-blue-600 text-2xl font-bold mr-12">{user ? user : "Sign Up"}</span>
                     </button>
                     

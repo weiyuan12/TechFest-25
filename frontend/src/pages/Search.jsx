@@ -1,9 +1,15 @@
 import { useState } from "react";
 import { Search, ExternalLink } from 'lucide-react';
+import { useEffect } from "react";
 
-export default function Search() {
+export default function SearchResults() {
+
+  const params = new URLSearchParams(location.search);
+  const initialQuery = params.get("q") || ""; // Get query from URL
+
   const [searchFocused, setSearchFocused] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [searchResults, setSearchResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -44,8 +50,8 @@ export default function Search() {
     setSearchQuery(query);
   };
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+  const handleSearch = async (event) => {
+    // event.preventDefault();
     
     if (!searchQuery.trim()) return;
     
@@ -81,6 +87,12 @@ export default function Search() {
     }, 1200); // Simulate network delay of 1.2 seconds
   };
 
+  // Auto-trigger search when the page loads with a query
+  useEffect(() => {
+    if (initialQuery) {
+      handleSearch(initialQuery);
+    }
+  }, [initialQuery]);
 
   // Function to render confidence level with appropriate color
   const renderConfidence = (confidence) => {
@@ -106,7 +118,7 @@ export default function Search() {
               <a href="#" className="text-gray-600 hover:text-blue-600 font-medium">About</a>
               <a href="#" className="text-gray-600 hover:text-blue-600 font-medium">Resources</a>
               <a href="#" className="text-gray-600 hover:text-blue-600 font-medium">Contact</a>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors duration-200">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors duration-200 cursor-pointer">
                 Sign Up
               </button>
             </div>
@@ -126,7 +138,7 @@ export default function Search() {
             </p>
           </div>
           
-          <form onSubmit={handleSearch2} className="relative">
+          <form onSubmit={handleSearch} className="relative">
             <div 
               className={`flex items-center bg-white rounded-xl border-2 ${
                 searchFocused ? 'border-blue-500 shadow-lg' : 'border-gray-200 shadow-md'
@@ -135,7 +147,7 @@ export default function Search() {
               <input
                 type="text"
                 placeholder="Search for a claim, news story, or topic..."
-                className="w-full px-6 py-4 text-lg rounded-l-xl focus:outline-none transition-all duration-200"
+                className="w-full px-6 py-4 h-14 text-lg rounded-l-xl focus:outline-none transition-all duration-200"
                 onFocus={() => setSearchFocused(true)}
                 onBlur={() => setSearchFocused(false)}
                 value={searchQuery}
@@ -143,7 +155,7 @@ export default function Search() {
               />
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-r-xl transition-all duration-200 flex items-center"
+                className="bg-blue-600 h-14 hover:bg-blue-700 text-white px-6 py-4 rounded-r-[0.5rem] transition-all duration-200 flex items-center cursor-pointer"
                 disabled={isLoading}
               >
                 {isLoading ? (
