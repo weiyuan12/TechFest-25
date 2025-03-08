@@ -34,6 +34,44 @@ services:
       retries: 5
       start_period: 40s
 
+  mongo-seed:
+    image: mongo:latest
+    depends_on:
+      - mongodb
+    volumes:
+      - ./data-seed:/data
+    command: >
+      bash -c '
+        set -e;
+        echo "Waiting for MongoDB to be ready...";
+        until mongosh --host mongodb --port 27017 -u root -p secret --authenticationDatabase admin --eval "print(\"waited for connection\")"; do
+          sleep 2;
+        done;
+        echo "MongoDB is ready.";
+
+        echo "Dropping existing database and creating a new one...";
+        mongosh --host mongodb --port 27017 -u root -p secret --authenticationDatabase admin --eval "
+          use user;
+          db.dropDatabase();
+        "
+
+        JSON_FILES=(
+          "user.queries.json"
+        )
+
+        for file in "$${JSON_FILES[@]}"; do
+          echo "Importing $$file...";
+          collection=$$(echo "$$file" | sed "s/shopping_platform\\.\(.*\)\.json/\\1/");
+          mongoimport --host mongodb --port 27017 -u root -p secret \
+            --authenticationDatabase admin --db user --collection "$$collection" \
+            --file /data/"$$file" --jsonArray;
+        done;
+
+        echo "Import completed.";
+      '
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge

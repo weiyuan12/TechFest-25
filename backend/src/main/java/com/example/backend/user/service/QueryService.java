@@ -70,22 +70,23 @@ public class QueryService {
 //        return query;
 //    }
 
-    // public Query createQueryForImage2(MultipartFile image){
-    //     Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(ImageDTO.builder().image(image).build());
-    //     query.setCreatedAt(LocalDateTime.now());
-    //     System.out.println(query);
-    //     log.info("query = {}", query);
+     public Query createQueryForImage2(MultipartFile image){
+         Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(ImageDTO.builder().image(image).build());
+         query.setMessageId(UUID.randomUUID());
+         query.setCreatedAt(LocalDateTime.now());
+         System.out.println(query);
+         log.info("query = {}", query);
 
-    //     // call llm
+         // call llm
 
 
-    //     // set the values after calling llm
-    //     query.setCategory(response.getCategory());
-    //     query.setTruthScore(response.getTruthScore());
-    //     query.setReasoning(response.getReasoning());
-    //     query.setCitations(response.getCitations());
-    //     queryRepository.save(query);
-    //     return query;
-    // }
+         // set the values after calling llm
+//         query.setCategory(response.getCategory());
+//         query.setTruthScore(response.getTruthScore());
+//         query.setReasoning(response.getReasoning());
+//         query.setCitations(response.getCitations());
+         queryRepository.save(query);
+         return query;
+     }
 
 }
