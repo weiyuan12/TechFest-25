@@ -13,13 +13,13 @@ This closely relates to how fackcheckers works. When performing fact-checking, p
 
 Agent architecture:
 <p align="center">
-  <img align="center" alt="Mockup" title="Mockup" src="assets/agentic_architecture.png" width="540" ></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/agentic_architecture.png"></img>
 </a>
 </p>
 
 Therefore, the agentic workflow can be illustrated as below:
 <p align="center">
-  <img align="center" alt="Mockup" title="Mockup" src="assets/example_flow.png" width="540" ></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/example_flow.png" ></img>
 </a>
 </p>
 
@@ -28,7 +28,7 @@ One of the most common pitfalls of LLMs are that LLMs highly succumb to hallucin
 
 Hence, by providing it with real-time Search API that can allow agents to receive up-to-date information. 
 <p align="center">
-  <img align="center" alt="Mockup" title="Mockup" src="assets/comparison.png" width="540" ></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/comparison.png"></img>
 </a>
 </p>
 
