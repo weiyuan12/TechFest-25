@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Contains common user details and additional ids to query for more information if needed.
@@ -12,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class QueryResponseDTO {
-    private String id;
+    private UUID messageId;
     private String text;
     private String category;
     private Integer truthScore;

@@ -27,16 +27,17 @@ public class QueryService {
     private final PythonServiceClient pythonServiceClient;
 
     public Query createQuery(QueryDTO queryDTO){
-        queryDTO.setId(UUID.randomUUID());
+        queryDTO.setMessageId(UUID.randomUUID());
         Query query = queryMapper.fromQueryDTOtoQueryForCreate(queryDTO);
         query.setCreatedAt(LocalDateTime.now());
+        query.setMessageId(queryDTO.getMessageId());
 
         log.info("userQuery: {}", query);
         // call llm
         QueryResponseDTO response = pythonServiceClient.postText(queryDTO);
 
         // set the values after calling llm
-        query.setCategory(response.getId());
+        query.setCategory(response.getCategory());
         query.setTruthScore(response.getTruthScore());
         query.setReasoning(response.getReasoning());
         query.setCitations(response.getCitations());

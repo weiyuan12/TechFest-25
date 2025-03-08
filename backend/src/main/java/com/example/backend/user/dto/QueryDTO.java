@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class QueryDTO {
-    private UUID id;
+    private UUID messageId;
     @NotBlank(message = "Username is required")
     private String text;
 }

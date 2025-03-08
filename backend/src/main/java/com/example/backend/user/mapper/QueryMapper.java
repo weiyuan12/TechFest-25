@@ -7,7 +7,7 @@ import com.example.backend.user.model.Query;
 
 @Mapper(componentModel = "spring")
 public interface QueryMapper {
-    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "messageId", ignore = true)
     @Mapping(target = "query", source = "text")
     Query fromQueryDTOtoQueryForCreate(QueryDTO queryDTO);
 }
