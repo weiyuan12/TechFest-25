@@ -59,6 +59,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query/a")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query/all")).permitAll()
+                        .requestMatchers(AntPathRequestMatcher.antMatcher("/api/query/image")).permitAll()
                         .requestMatchers(AntPathRequestMatcher.antMatcher("/api/users/signup")).permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
