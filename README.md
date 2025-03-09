@@ -78,4 +78,7 @@ This enables AI agents to operate autonomously, make complex decision based on t
 To learn more about the Agent Architecture, please refer [here](https://github.com/weiyuan12/TechFest-25/tree/main/genai).
 
 ## Future Works 
-[TO BE COMPLETED]
+One of the key objectives moving forward is to further enhance the chatbot, allowing users to interact directly with our LLM. This enhancement will enable users not only to verify claims through the chatbot but also to engage in dynamic conversations to gain deeper insights and understanding about various topics.
+
+Furthermore, integrating our agentic workflow into popular messaging platforms such as Telegram or WhatsApp will provide users with greater convenience. This integration would allow users to easily and quickly submit uncertain claims directly through these familiar messaging applications, significantly improving the accessibility and user experience.
+
