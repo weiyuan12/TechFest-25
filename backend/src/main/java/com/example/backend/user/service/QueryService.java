@@ -81,13 +81,20 @@ public class QueryService {
         query.setUsername(image.getUsername());
         System.out.println(query);
         ImageResponseDTO response = pythonServiceClient.postImage(image.getFiles(), query.getMessageId().toString());
-        System.out.println(response);
+//        System.out.println(response);
 
         // set the values after calling llm
-        query.setCategory(response.getCategory());
-        query.setTruthScore(response.getTruthscore());
-        query.setReasoning(response.getReasoning());
-        query.setCitations(response.getCitations());
+        query.setCategory(response.getStructuredResponse().getCategory());
+        query.setTruthScore(response.getStructuredResponse().getTruthscore());
+        query.setReasoning(response.getStructuredResponse().getReasoning());
+
+        // Convert List<String> to String[] if necessary, depending on your Query class
+        List<String> citationsList = response.getStructuredResponse().getCitations();
+        String[] citationsArray = citationsList != null ?
+                citationsList.toArray(new String[0]) :
+                new String[0];
+        query.setCitations(citationsArray);
+
         queryRepository.save(query);
         return query;
     }
