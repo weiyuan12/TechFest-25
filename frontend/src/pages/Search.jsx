@@ -309,7 +309,7 @@ export default function SearchResults() {
                     onClick={onButtonClick} 
                     id="upload" 
                     type="button"
-                    className="p-2 hover:bg-blue-50 rounded-full"
+                    className="p-2 hover:bg-blue-50 rounded-full cursor-pointer"
                   >
                     <Image className="stroke-blue-600 stroke-2 h-6 w-6 transition-transform duration-200 transform hover:scale-105" />
                   </button>
@@ -319,7 +319,7 @@ export default function SearchResults() {
               {/* Search Button */}
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 text-white w-14 h-14 flex-shrink-0 flex items-center justify-center cursor-pointer transition-colors duration-200"
+                className="bg-blue-600 hover:bg-blue-700 rounded-lg text-white w-14 h-22 flex-shrink-0 flex items-center justify-center cursor-pointer transition-colors duration-200"
                 disabled={isLoading}
               >
                 {isLoading ? (
