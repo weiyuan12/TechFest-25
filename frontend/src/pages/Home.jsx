@@ -13,6 +13,7 @@ import { useNavigate } from "react-router";
 
 export default function Home() {
   const navigate  = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [query, setQuery] = useState("");
   const [displaySignInPage, setDisplaySignInPage] = useState(false);
@@ -44,10 +45,12 @@ export default function Home() {
 
   async function handleSearch(event) {
     event.preventDefault();
+
+    setIsLoading(true);
+
     const response = await sendSearchRequest(query, file);
     console.log(response);
     navigate("/search");
-    
     
   }
 
@@ -119,7 +122,7 @@ export default function Home() {
                     {/* Image Upload Button */}
                     <label
                       htmlFor="image-upload"
-                      className="cursor-pointer mx-2 text-gray-500 hover:text-blue-600 transition-colors duration-200"
+                      className="cursor-pointer mx-2 text-green-100 hover:text-blue-600 transition-colors duration-200"
                     >
                       <input
                         id="image-upload"
@@ -134,7 +137,7 @@ export default function Home() {
                         id="upload"
                         type="button"
                       >
-                        <Image className="stroke-blue-600 stroke-2 h-8 w-8 transition-transform duration-200 transform hover:scale-105" />
+                        <Image className="stroke-blue-600 stroke-2 h-12 w-12 transition-transform duration-200 transform hover:scale-105 cursor-pointer" />
                       </IconButton>
                     </label>
 
@@ -142,16 +145,20 @@ export default function Home() {
                     <button
                       type="submit"
                       className="bg-blue-600 hover:bg-blue-700 text-white w-12 h-12 rounded-lg transition-transform duration-200 transform hover:scale-105 mr-2 flex items-center justify-center cursor-pointer"
+                      disabled={isLoading}
                     >
                       {/* <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-search">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.3-4.3"></path>
                       </svg> */}
+                      {isLoading ? (
+                        <div className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      ) : (
                       <Search
                         size={28}
                         viewBox="0 0 24 24"
                         className="transition-transform duration-200 transform hover:scale-105"
-                      />
+                      />)}
                     </button>
                   </div>
                   <div className="mt-4 text-center text-gray-500">

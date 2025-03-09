@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, ExternalLink } from 'lucide-react';
+// import { IconButton } from "@material-tailwind/react";
 import Header from "../components/Header";
 
 export default function SearchResults() {
@@ -10,6 +11,19 @@ export default function SearchResults() {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const inputFile = useRef(null);
+
+  const onButtonClick = () => {
+    inputFile.current.click();
+  };
+  const handleFileChange = (event) => {
+    event.preventDefault();
+    const fileUpload = event.target.files[0];
+    setFile(fileUpload)
+    setImagePreview(URL.createObjectURL(fileUpload));
+    console.log(fileUpload);
+  };
 
   // Hardcoded response data (you can replace with API call later)
   const mockResponseData = {
@@ -133,6 +147,28 @@ export default function SearchResults() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
+
+{/*
+<label
+            htmlFor="image-upload"
+            className="cursor-pointer mx-2 text-green-100 hover:text-blue-600 transition-colors duration-200"
+          >
+            <input
+              id="image-upload"
+              ref={inputFile}
+              onChange={handleFileChange}
+              type="file"
+              accept="image/*"
+              className="hidden"
+            />
+            <IconButton
+              onClick={onButtonClick}
+              id="upload"
+              type="button"
+            >
+              <Image className="stroke-blue-600 stroke-2 h-12 w-12 transition-transform duration-200 transform hover:scale-105 cursor-pointer" />
+            </IconButton>
+          </label> */}
           
           <button
             type="submit"
