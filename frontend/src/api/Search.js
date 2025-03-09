@@ -1,6 +1,27 @@
 import axios from "axios"
 
-export const sendSearchRequest = async (text, file) => {
+export const sendSearchTextRequest = async (text) => {
+    try {
+        const response = await axios.post(
+            "http://localhost:8080/api/query/a", 
+            {
+                "text" : text
+            }, // Your request data
+            {
+                headers: {
+                    'Content-Type': 'application/json' 
+                }
+            }
+        );
+        return response
+        // ... handle response
+    } catch (error) {
+        // ... handle error
+    }
+};
+
+
+export const sendSearchImageRequest = async (file) => {
     try {
         const response = await axios.post(
             "http://localhost:8080/api/query/image", 

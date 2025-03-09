@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Carousel from "../components/Carousel";
 import TopSearches from "../components/TopSearches";
 import FadeOnScroll from "../components/FadeOnScroll";
-import { sendSearchRequest } from "../api/Search";
+import { sendSearchTextRequest, sendSearchImageRequest } from "../api/Search";
 import { useCallback, useContext, useState, useRef } from "react";
 import { UserContext } from "../context/UserContext.jsx";
 import SignInModal from "../components/SignInModal.jsx";
@@ -14,8 +14,8 @@ import { useNavigate } from "react-router";
 export default function Home() {
   const navigate  = useNavigate();
   const { user, setUser } = useContext(UserContext);
-  const [query, setQuery] = useState("");
   const [displaySignInPage, setDisplaySignInPage] = useState(false);
+  const [query, setQuery] = useState("");
   const [imagePreview, setImagePreview] = useState(null);
   const [file, setFile] = useState(null);
   const inputFile = useRef(null);
@@ -44,11 +44,14 @@ export default function Home() {
 
   async function handleSearch(event) {
     event.preventDefault();
-    const response = await sendSearchRequest(query, file);
-    console.log(response);
+    if (file) {
+      const response = await sendSearchImageRequest(file)
+    }
+    else {
+      const response = await sendSearchTextRequest(query)
+    }
+    console.log(response)
     navigate("/search");
-    
-    
   }
 
   return (
