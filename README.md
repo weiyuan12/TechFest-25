@@ -43,6 +43,7 @@ By harnessing the powerful reasoning capabilities of OpenAI's GPT-4o-mini model,
   <img align="center" alt="Mockup" title="Mockup" src="assets/search_feature_1.png"></img>
   <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_image.png"></img>
   <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_text.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_text_and_workings.png"></img>
 </a>
 </p>
 
