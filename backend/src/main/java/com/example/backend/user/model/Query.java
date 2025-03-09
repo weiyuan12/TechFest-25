@@ -1,5 +1,6 @@
 package com.example.backend.user.model;
 
+import com.example.backend.user.dto.QueryResponseDTO;
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,5 +29,7 @@ public class Query {
 //    private MultipartFile image;
     private Binary image;
     private String username;
+
+    private QueryResponseDTO.Messages[] messages;
 
 }

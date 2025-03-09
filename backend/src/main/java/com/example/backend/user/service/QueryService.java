@@ -39,12 +39,14 @@ public class QueryService {
         log.info("userQuery: {}", query);
         // call llm
         QueryResponseDTO response = pythonServiceClient.postText(queryDTO);
+        log.info("response: {}", response);
+        query.setMessages(response.getMessages());
 
         // set the values after calling llm
-        query.setCategory(response.getCategory());
-        query.setTruthScore(response.getTruthscore());
-        query.setReasoning(response.getReasoning());
-        query.setCitations(response.getCitations());
+        query.setCategory(response.getStructuredResponse().getCategory());
+        query.setTruthScore(response.getStructuredResponse().getTruthscore());
+        query.setReasoning(response.getStructuredResponse().getReasoning());
+        query.setCitations(response.getStructuredResponse().getCitations());
         queryRepository.save(query);
         return query;
     }
