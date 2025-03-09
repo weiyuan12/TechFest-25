@@ -29,7 +29,7 @@ public class QueryService {
     private final QueryMapper queryMapper;
     private final PythonServiceClient pythonServiceClient;
 
-    public Query createQueryForText(QueryDTO queryDTO){
+    public Query createQueryForText(QueryDTO queryDTO) {
         queryDTO.setMessageId(UUID.randomUUID());
         queryDTO.setUsername(queryDTO.getUsername());
         Query query = queryMapper.fromQueryDTOtoQueryForCreate(queryDTO);
@@ -42,7 +42,7 @@ public class QueryService {
 
         // set the values after calling llm
         query.setCategory(response.getCategory());
-        query.setTruthScore(response.getTruthScore());
+        query.setTruthScore(response.getTruthscore());
         query.setReasoning(response.getReasoning());
         query.setCitations(response.getCitations());
         queryRepository.save(query);
@@ -54,41 +54,40 @@ public class QueryService {
         return queries;
     }
 
-//    public Query createQueryForImage(ImageDTO imageDTO){
-//        Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(imageDTO);
-//        query.setCreatedAt(LocalDateTime.now());
-//
-//        log.info("userQuery: {}", query);
-//        // call llm
-//
-//
-//        // set the values after calling llm
-//        query.setCategory("CATEGORY");
-//        query.setTruthScore(1);
-//        query.setReasoning("REASONING");
-//        String[] citations = {"lousy", "fake media outlet"};
-//        query.setCitations(citations);
-//        queryRepository.save(query);
-//        return query;
-//    }
+    // public Query createQueryForImage(ImageDTO imageDTO){
+    // Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(imageDTO);
+    // query.setCreatedAt(LocalDateTime.now());
+    //
+    // log.info("userQuery: {}", query);
+    // // call llm
+    //
+    //
+    // // set the values after calling llm
+    // query.setCategory("CATEGORY");
+    // query.setTruthScore(1);
+    // query.setReasoning("REASONING");
+    // String[] citations = {"lousy", "fake media outlet"};
+    // query.setCitations(citations);
+    // queryRepository.save(query);
+    // return query;
+    // }
 
-     public Query createQueryForImage2(ImageDTO image){
-         Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(image);
-         query.setMessageId(UUID.randomUUID());
-         query.setCreatedAt(LocalDateTime.now());
-         query.setUsername(image.getUsername());
-         System.out.println(query);
-         ImageResponseDTO response = pythonServiceClient.postImage(image.getFiles(), query.getMessageId().toString());
-         System.out.println(response);
+    public Query createQueryForImage2(ImageDTO image) {
+        Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(image);
+        query.setMessageId(UUID.randomUUID());
+        query.setCreatedAt(LocalDateTime.now());
+        query.setUsername(image.getUsername());
+        System.out.println(query);
+        ImageResponseDTO response = pythonServiceClient.postImage(image.getFiles(), query.getMessageId().toString());
+        System.out.println(response);
 
-
-         // set the values after calling llm
+        // set the values after calling llm
         query.setCategory(response.getCategory());
-        query.setTruthScore(response.getTruthScore());
+        query.setTruthScore(response.getTruthscore());
         query.setReasoning(response.getReasoning());
         query.setCitations(response.getCitations());
-         queryRepository.save(query);
-         return query;
-     }
+        queryRepository.save(query);
+        return query;
+    }
 
 }

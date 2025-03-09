@@ -45,12 +45,11 @@ export default function Home() {
   async function handleSearch(event) {
     event.preventDefault();
     if (file) {
-      const response = await sendSearchImageRequest(file)
+      const response = await sendSearchImageRequest(file, user)
     }
     else {
-      const response = await sendSearchTextRequest(query)
+      const response = await sendSearchTextRequest(query, user)
     }
-    console.log(response)
     navigate("/search");
   }
 

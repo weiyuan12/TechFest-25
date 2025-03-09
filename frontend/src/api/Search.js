@@ -1,11 +1,12 @@
 import axios from "axios"
 
-export const sendSearchTextRequest = async (text) => {
+export const sendSearchTextRequest = async (text, user) => {
     try {
         const response = await axios.post(
             "http://localhost:8080/api/query/a", 
             {
-                "text" : text
+                "text" : text,
+                "username" : user
             }, // Your request data
             {
                 headers: {
@@ -21,12 +22,13 @@ export const sendSearchTextRequest = async (text) => {
 };
 
 
-export const sendSearchImageRequest = async (file) => {
+export const sendSearchImageRequest = async (file, user) => {
     try {
         const response = await axios.post(
             "http://localhost:8080/api/query/image", 
             {
-                "image" : file
+                "image" : file,
+                "username" : user
             }, // Your request data
             {
                 headers: {

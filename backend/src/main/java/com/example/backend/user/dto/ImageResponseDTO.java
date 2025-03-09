@@ -11,8 +11,8 @@ public class ImageResponseDTO {
 
     private UUID messageId;
     private String category;
-    private Integer truthScore;
+    private Integer truthscore;
     private String reasoning;
     private String[] citations;
-    
+
 }

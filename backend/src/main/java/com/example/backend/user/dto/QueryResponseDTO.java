@@ -8,7 +8,8 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Contains common user details and additional ids to query for more information if needed.
+ * Contains common user details and additional ids to query for more information
+ * if needed.
  */
 @Getter
 @Setter
@@ -16,7 +17,7 @@ public class QueryResponseDTO {
     private UUID messageId;
     private String text;
     private String category;
-    private Integer truthScore;
+    private Integer truthscore;
     private String reasoning;
     private String[] citations;
     private LocalDateTime createdAt;
