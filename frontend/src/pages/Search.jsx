@@ -48,6 +48,7 @@ export default function SearchResults() {
       setQuery("")
       setFile(null)
       setIsLoading(false)
+      setImagePreview(null)
       fetchAllQueries();
     }
   useEffect(() => {
