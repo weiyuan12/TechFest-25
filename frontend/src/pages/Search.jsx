@@ -1,26 +1,62 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useRef, useContext, useCallback } from "react";
 import { Search, ExternalLink, Image } from "lucide-react";
 import Header from "../components/Header";
 import { UserContext } from "../context/UserContext";
+import SignInModal from "../components/SignInModal";
+import { sendSearchImageRequest, sendSearchTextRequest } from "../api/Search";
 
 export default function SearchResults() {
   const {user, setUser} = useContext(UserContext)
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [displaySignInPage, setDisplaySignInPage] = useState(false);
   const [allQueries, setAllQueries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const resultsEndRef = useRef(null);
   const inputFile = useRef(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [file, setFile] = useState(null);
 
-  // Fetch all queries from backend on component mount
+  const handleFileChange = (event) => {
+      event.preventDefault();
+      const fileUpload = event.target.files[0];
+      setFile(fileUpload)
+      setImagePreview(URL.createObjectURL(fileUpload));
+      console.log(fileUpload);
+    };
+    const handleCallback = (username) => {
+      setUser(username);
+      setDisplaySignInPage(false);
+    };
+    const removeImage = () => {
+      setImagePreview(null);
+      setFile(null)
+    }
+  
+    async function handleSearch(event) {
+      event.preventDefault();
+  
+      setIsLoading(true);
+  
+      if (file) {
+        const response = await sendSearchImageRequest(file, user)
+      }
+      else {
+        const response = await sendSearchTextRequest(query, user)
+      }
+      setQuery("")
+      setFile(null)
+      setIsLoading(false)
+      fetchAllQueries();
+    }
   useEffect(() => {
     fetchAllQueries();
     console.log(allQueries);
-  }, []);
+  }, [user]);
 
   useEffect(() => {
-    console.log(allQueries);
+    window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"})
   }, [allQueries]);
 
   // Function to fetch all queries
@@ -38,24 +74,14 @@ export default function SearchResults() {
     }
   };
 
-  // Simulate search function - would be replaced with actual API call
-  const handleSearch = (e) => {
-    e.preventDefault();
-  };
-
-  // Handle file upload
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      // Handle file upload logic here
-      console.log("File selected:", file.name);
-    }
-  };
-
   // Trigger file input click
   const onButtonClick = () => {
     inputFile.current.click();
   };
+  const signIn = useCallback(() => {
+      setDisplaySignInPage(true);
+      console.log("Sign in");
+    }, [displaySignInPage]);
 
   // Scroll to bottom whenever searchResults change
   useEffect(() => {
@@ -67,11 +93,11 @@ export default function SearchResults() {
   // Function to render truth score with appropriate color
   const renderTruthScore = (score) => {
     let color;
-    if (score >= 80) color = "text-green-600";
-    else if (score >= 50) color = "text-yellow-600";
+    if (score >= 4) color = "text-green-600";
+    else if (score = 3) color = "text-yellow-600";
     else color = "text-red-600";
 
-    return <span className={`font-bold ${color}`}>{score}%</span>;
+    return <span className={`font-bold ${color}`}>{score}</span>;
   };
 
   // Function to format date
@@ -89,8 +115,12 @@ export default function SearchResults() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100">
       {/* Header */}
-      <Header user={user}/>
-
+      <Header user={user} signIn={signIn}/>
+      <SignInModal
+          isOpen={displaySignInPage}
+          onClose={() => setDisplaySignInPage(false)}
+          callbackUserName={handleCallback}
+        />
       {/* Main content */}
       <main className="flex-grow flex flex-col items-center p-6 overflow-y-auto">
         <div className="w-3/5">
@@ -150,7 +180,7 @@ export default function SearchResults() {
                             {item.category}
                           </div>
                           <div className="text-l">
-                            Truth Score: {renderTruthScore(item.truthScore)}
+                            Truth Score: {renderTruthScore(item.truthscore)}
                           </div>
                         </div>
 
@@ -314,7 +344,37 @@ export default function SearchResults() {
         </div>
 
         {/* Input form at the bottom */}
-        <div className="w-full max-w-2xl mt-auto mb-4">
+        <div className="w-3/5 mt-auto mb-4 pr-40">
+        {imagePreview && (
+                      <div className="mt-2 relative flex flex-row gap-4">
+                        <img
+                          src={imagePreview}
+                          alt="Preview"
+                          className="h-24 rounded-md"
+                        />
+                        <button
+                          type="button"
+                          onClick={removeImage}
+                          className="h-6 bg-gray-800 bg-opacity-50 rounded-full p-1 text-white hover:bg-opacity-70"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="lucide lucide-x"
+                          >
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                          </svg>
+                        </button>
+                      </div>
+                    )}
           <form className="w-full" onSubmit={handleSearch}>
             <div className="flex items-center bg-white rounded-lg border-2 border-blue-600 shadow-lg overflow-hidden">
               <textarea
