@@ -11,7 +11,9 @@ For instance, during the COVID-19 pandemic, misinformation spread rapidly, which
 Therefore, to combat disinformation, there is a need to develop effective tool to streamline and automate fact-checking.
 
 ## 🌍 About
-Traditionally, fact-checking methods were manual, requiring human experts to verify each and every information and provide justification to ensure credibility. However, with the advancements in large language models (LLMs), such as OpenAI's GPT-4o-mini, it introduces powerful reasoning capabilities, enabling automated classification of messages and providing clear justifications for their assigned labels. 
+Traditionally, fact-checking methods were manual, requiring human experts meticulously verifying each and every piece of information and providing justification to ensure credibility. Typically, professional fact checkers will begin by examining the original claim. They, then conduct thorough research, by consulting on reputable online resources to acquire necessary context and background. Equipped with these insights, the fact-checkers subsequently assess the accuracy of the claim and provide informed responses to users.
+
+With the advancements in large language models (LLMs), such as OpenAI's GPT-4o-mini, it introduces powerful reasoning capabilities, enabling automated classification of messages and providing clear justifications for their assigned labels. 
 
 As LLMs like GPT-4o-mini have proved its advanced capabilities such as:
 - Generating coherent and contextually relevant text, making them invaluable in providing explanations
@@ -22,12 +24,27 @@ This further exemplifies LLM's strong reasoning capabilities. Not only that, LLM
 
 This shift significantly streamlines and automates the fact-checking process, while enhancing accuracy and efficiency in combating misinformation.
 
+Therefore, our primary objective is to closely replicate the workflows of these expert fact-checkers through automation. By doing so, we aim to significantly reduce the tedious and labour-intensive aspects of manual fact-checking, and reducing the time needed to provide justification to users, enhancing efficiency and reliability in the verification process.
+
 **FactFinder**, our proposed solution, utilises LLM with Multiagentic framework to analyse text inputs or images to allow the Agents to act as factcheckers that helps users to classify their messages. 
 
-Leveraging on the latest AI technologies to analyse uploaded images or text description, aids in offering accurate replies and suggestions to users. Using cutting-edge multimodals such as GPT-Vision, GPT-4o-mini, the platform extract and analyses image contents, converting them text for further evaluation. 
+By harnessing the powerful reasoning capabilities of OpenAI's GPT-4o-mini model, and designing an agentic workflow, we equip our agents with essential tools, including GoogleSearchAPI, PubMedAPI and ArxivAPI. These tools empower agents to efficiently search for the latest information, ensuring they can deliver accurate and up-to-date assessments of user-submitted claims. 
 
 ## 🚀 Multi-Pronged Approach
-[TODO: Add in the features of the web application and interface]
+### 1. Simple and Intuitive Landing Page
+<p align="center">
+  <img align="center" alt="Mockup" title="Mockup" src="assets/landing_page.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_library.png"></img>
+</a>
+</p>
+
+### 2. Search Feature 
+<p align="center">
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_feature_1.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_image.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_text.png"></img>
+</a>
+</p>
 
 ## 📌 Technical Stack
 ### 🤖 FrontEnd
@@ -74,4 +91,7 @@ This enables AI agents to operate autonomously, make complex decision based on t
 To learn more about the Agent Architecture, please refer [here](https://github.com/weiyuan12/TechFest-25/tree/main/genai).
 
 ## Future Works 
-[TO BE COMPLETED]
+One of the key objectives moving forward is to further enhance the chatbot, allowing users to interact directly with our LLM. This enhancement will enable users not only to verify claims through the chatbot but also to engage in dynamic conversations to gain deeper insights and understanding about various topics.
+
+Furthermore, integrating our agentic workflow into popular messaging platforms such as Telegram or WhatsApp will provide users with greater convenience. This integration would allow users to easily and quickly submit uncertain claims directly through these familiar messaging applications, significantly improving the accessibility and user experience.
+
