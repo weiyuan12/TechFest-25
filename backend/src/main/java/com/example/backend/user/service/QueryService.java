@@ -2,6 +2,8 @@ package com.example.backend.user.service;
 
 import com.example.backend.user.dto.ImageDTO;
 import lombok.extern.slf4j.Slf4j;
+
+import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.backend.user.client.PythonServiceClient;
 import com.example.backend.user.dto.QueryDTO;
 import com.example.backend.user.dto.QueryResponseDTO;
+import com.example.backend.user.dto.QueryResponseToFE;
 import com.example.backend.user.mapper.QueryMapper;
 import com.example.backend.user.model.Query;
 import com.example.backend.user.repository.QueryRepository;
@@ -17,9 +20,12 @@ import com.example.backend.user.dto.ImageResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -44,13 +50,27 @@ public class QueryService {
 
         // set the values after calling llm
         query.setCategory(response.getStructuredResponse().getCategory());
-        query.setTruthScore(response.getStructuredResponse().getTruthscore());
+        query.setTruthscore(response.getStructuredResponse().getTruthscore());
         query.setReasoning(response.getStructuredResponse().getReasoning());
         query.setCitations(response.getStructuredResponse().getCitations());
         queryRepository.save(query);
         return query;
     }
-
+    public List<QueryResponseToFE> getAllQueriesByUser(String username) {
+        List<Query> queries = queryRepository.findByUsername(username);
+        return queries.stream().map(query -> new QueryResponseToFE(
+            query.getMessageId(),
+            query.getQuery(),
+            query.getCategory(),
+            query.getTruthscore(),
+            query.getReasoning(),
+            query.getCitations(),
+            query.getCreatedAt(),
+            query.getImage() != null ? Base64.getEncoder().encodeToString(query.getImage().getData()) : null, // Convert Binary to Base64
+            query.getUsername(),
+            query.getMessages()
+        )).collect(Collectors.toList());
+    }
     public List<Query> getAllQueries() {
         List<Query> queries = queryRepository.findAll(Sort.by(Sort.Order.desc("createdAt")));
         return queries;
@@ -79,13 +99,19 @@ public class QueryService {
         query.setMessageId(UUID.randomUUID());
         query.setCreatedAt(LocalDateTime.now());
         query.setUsername(image.getUsername());
-        System.out.println(query);
+        if (image.getFiles() != null && !image.getFiles().isEmpty()) {
+            try {
+                query.setImage(new Binary(image.getFiles().getBytes()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         ImageResponseDTO response = pythonServiceClient.postImage(image.getFiles(), query.getMessageId().toString());
 //        System.out.println(response);
 
         // set the values after calling llm
         query.setCategory(response.getStructuredResponse().getCategory());
-        query.setTruthScore(response.getStructuredResponse().getTruthscore());
+        query.setTruthscore(response.getStructuredResponse().getTruthscore());
         query.setReasoning(response.getStructuredResponse().getReasoning());
 
         // Convert List<String> to String[] if necessary, depending on your Query class

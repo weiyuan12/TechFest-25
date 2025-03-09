@@ -2,9 +2,12 @@ package com.example.backend.user.controller;
 
 import com.example.backend.user.dto.ImageDTO;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import java.nio.file.Path;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -52,9 +55,9 @@ public class QueryController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<?> getMethodName() {
+    public ResponseEntity<?> getMethodName(@RequestParam String username) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(queryService.getAllQueries());
+            return ResponseEntity.status(HttpStatus.CREATED).body(queryService.getAllQueriesByUser(username));
         } catch (Exception e) {
             log.error("Error creating user", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred");

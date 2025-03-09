@@ -1,24 +1,23 @@
-package com.example.backend.user.model;
-
-import com.example.backend.user.dto.QueryResponseDTO;
-import org.bson.types.Binary;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
+package com.example.backend.user.dto;
 
 import java.time.LocalDateTime;
+import java.util.Base64;
 import java.util.UUID;
 
-@Data
-@NoArgsConstructor
+import org.bson.types.Binary;
+import org.springframework.data.annotation.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @AllArgsConstructor
-@Document(collection = "queries")
-public class Query {
-    @Id
+@NoArgsConstructor
+@Getter
+@Setter
+public class QueryResponseToFE {
+
     private UUID messageId;
     private String query;
     private String category;
@@ -27,9 +26,9 @@ public class Query {
     private String[] citations;
     private LocalDateTime createdAt;
 //    private MultipartFile image;
-    private Binary image;
+    private String image;
     private String username;
 
     private QueryResponseDTO.Messages[] messages;
-
+    
 }
