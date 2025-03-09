@@ -16,4 +16,6 @@ public class ImageDTO {
     private UUID messageId;
 
     private MultipartFile files;
+
+    private String username;
 }

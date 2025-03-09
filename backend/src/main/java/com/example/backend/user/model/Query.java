@@ -27,5 +27,6 @@ public class Query {
     private LocalDateTime createdAt;
 //    private MultipartFile image;
     private Binary image;
+    private String username;
 
 }

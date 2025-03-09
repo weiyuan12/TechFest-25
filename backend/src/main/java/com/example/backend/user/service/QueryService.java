@@ -31,6 +31,7 @@ public class QueryService {
 
     public Query createQueryForText(QueryDTO queryDTO){
         queryDTO.setMessageId(UUID.randomUUID());
+        queryDTO.setUsername(queryDTO.getUsername());
         Query query = queryMapper.fromQueryDTOtoQueryForCreate(queryDTO);
         query.setCreatedAt(LocalDateTime.now());
         query.setMessageId(queryDTO.getMessageId());
@@ -75,6 +76,7 @@ public class QueryService {
          Query query = queryMapper.fromImageQueryDTOtoQueryForCreate(image);
          query.setMessageId(UUID.randomUUID());
          query.setCreatedAt(LocalDateTime.now());
+         query.setUsername(image.getUsername());
          System.out.println(query);
          ImageResponseDTO response = pythonServiceClient.postImage(image.getFiles(), query.getMessageId().toString());
          System.out.println(response);

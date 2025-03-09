@@ -37,10 +37,11 @@ public class QueryController {
     }
 
     @PostMapping(value = "/image", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, "multipart/form-data;charset=UTF-8"})
-    public ResponseEntity<?> postMethodName2(@RequestPart("image") MultipartFile image) {
+    public ResponseEntity<?> postMethodName2(@RequestPart("image") MultipartFile image, @RequestPart("username") String username) {
         try {
             ImageDTO imageDTO = ImageDTO.builder()
                 .files(image)
+                .username(username)
                 .build();
             log.info("Recieved image=  {}", imageDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body(queryService.createQueryForImage2(imageDTO));

@@ -14,4 +14,6 @@ public class QueryDTO {
     private UUID messageId;
     @NotBlank(message = "Username is required")
     private String text;
+
+    private String username;
 }
