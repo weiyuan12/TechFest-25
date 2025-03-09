@@ -53,10 +53,11 @@ async def check_text(
         result = agent_graph.invoke({"messages": [user_input]}, config)
         print(result)
 
-        structured_response = result.get('structured_response')
+        structured_response = result.get('structured_response', None)
+        messages = result.get('messages', None)
 
         # print(structured_response.dict())
-        return structured_response.dict()
+        return {"messages": messages, "structured_response": structured_response.dict()}
     except:
         raise
 
@@ -113,8 +114,9 @@ async def check_image(
 
         # Return as structured response
         structured_response = result.get('structured_response')
+        messages = result.get('messages', None)
 
-        return structured_response.dict()
+        return {"messages": messages, "structured_response": structured_response.dict()}
     
     except Exception as e:
         raise 
