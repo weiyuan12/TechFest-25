@@ -1,5 +1,5 @@
 <div align = "center">
-<h1> 🌏 FactChecker: Your automated Fact Checker</h1>
+<h1> 🌏 FactFinder: Find your truth in a sea of information</h1>
 </div>
 
 ## 👉 Preserve Digital Integrity: Combating Misinformation with AI
@@ -22,7 +22,7 @@ This further exemplifies LLM's strong reasoning capabilities. Not only that, LLM
 
 This shift significantly streamlines and automates the fact-checking process, while enhancing accuracy and efficiency in combating misinformation.
 
-**FactChecker**, our proposed solution, utilises LLM with Multiagentic framework to analyse text inputs or images to allow the Agents to act as factcheckers that helps users to classify their messages. 
+**FactFinder**, our proposed solution, utilises LLM with Multiagentic framework to analyse text inputs or images to allow the Agents to act as factcheckers that helps users to classify their messages. 
 
 Leveraging on the latest AI technologies to analyse uploaded images or text description, aids in offering accurate replies and suggestions to users. Using cutting-edge multimodals such as GPT-Vision, GPT-4o-mini, the platform extract and analyses image contents, converting them text for further evaluation. 
 
