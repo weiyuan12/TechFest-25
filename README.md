@@ -31,7 +31,20 @@ Therefore, our primary objective is to closely replicate the workflows of these 
 By harnessing the powerful reasoning capabilities of OpenAI's GPT-4o-mini model, and designing an agentic workflow, we equip our agents with essential tools, including GoogleSearchAPI, PubMedAPI and ArxivAPI. These tools empower agents to efficiently search for the latest information, ensuring they can deliver accurate and up-to-date assessments of user-submitted claims. 
 
 ## 🚀 Multi-Pronged Approach
-[TODO: Add in the features of the web application and interface]
+### 1. Simple and Intuitive Landing Page
+<p align="center">
+  <img align="center" alt="Mockup" title="Mockup" src="assets/landing_page.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_library.png"></img>
+</a>
+</p>
+
+### 2. Search Feature 
+<p align="center">
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_feature_1.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_image.png"></img>
+  <img align="center" alt="Mockup" title="Mockup" src="assets/search_with_text.png"></img>
+</a>
+</p>
 
 ## 📌 Technical Stack
 ### 🤖 FrontEnd
