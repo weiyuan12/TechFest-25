@@ -62,6 +62,28 @@ By harnessing the powerful reasoning capabilities of OpenAI's GPT-4o-mini model,
 
 <hr>
 
+## Getting Started
+
+**Important Prerequisites:**
+
+* Docker installed on your system.
+
+**Steps to Run:**
+
+1.  **Start the Backend Services and MongoDB:**
+    ```bash
+    docker-compose up --build
+    ```
+    This command will build the backend services (including the GenAI and SpringBoot components) and start the MongoDB container using Docker Compose.
+
+2.  **Start the Frontend:**
+    ```bash
+    cd frontend
+    npm run dev
+    ```
+    Navigate to the `frontend` directory and start the React development server.
+
+
 ## 🗺️ Our Tech Approach using Artificial Intelligence
 ### 🚂 Large Language Models 
 - GPT-4o-mini: GPT-4o-mini is a multimodal Large Language model equipped with sophisticated capabilities that accepts inputs of any combination such as text, audio and image outputs. We uses both the text and image as input to predict and analyse the text and image contents. 
