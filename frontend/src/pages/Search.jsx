@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useContext } from "react";
 import { Image, Search, ExternalLink } from "lucide-react";
 import { IconButton } from "@material-tailwind/react";
 import Header from "../components/Header";
+import { UserContext } from "../context/UserContext";
 
 export default function SearchResults() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +14,7 @@ export default function SearchResults() {
   const [imagePreview, setImagePreview] = useState(null);
   const [file, setFile] = useState(null);
   const inputFile = useRef(null);
+  const { user, setUser } = useContext(UserContext);
 
   const onButtonClick = () => {
     inputFile.current.click();
